@@ -10,7 +10,7 @@ all: $(EXEC)
 $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-main.o: 
+main.o: edb.hh 
 
 %.o: %.cc
 	$(CC) -o $@ $(CFLAGS) -c $<
