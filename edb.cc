@@ -55,10 +55,14 @@ bool Edb::Execute () {
     exit(0);
   else if (tokens[0] == "continue")
     ptrace (PTRACE_CONT, pid, NULL, NULL); 
-  else if (tokens[0] == "registers")
-    ;
-  else if (tokens[0] == "kill")
-    ;
+  else if (tokens[0] == "registers") {
+    struct user_regs_struct regs;
+    ptrace (PTRACE_GETREGS, pid, NULL, &regs); 
+    cout << "rax: " << regs.rax << endl;
+    cout << "rbx: " << regs.rbx << endl;
+    cout << "rcx: " << regs.rcx << endl;
+  } else if (tokens[0] == "kill")
+    ptrace (PTRACE_KILL, pid, NULL, NULL); 
 
   tokens.clear();
   return true;

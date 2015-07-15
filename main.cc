@@ -19,14 +19,14 @@ void do_trace (pid_t pid_) {
 //  while (true) {
     Edb edb(pid_);
     pid_t w = wait(&status);
-    if (WIFEXITED(status))
+  /*  if (WIFEXITED(status))
       cout << "exited" << endl;
     if (WIFSIGNALED(status))
       cout << "sig" << endl;
     if (WIFSTOPPED(status))
       cout << "stopped" << endl;
     if (WIFCONTINUED(status))
-      cout << "continued" << endl;
+      cout << "continued" << endl; */
  //     break;
     if (w == -1)
       cout << "error" << endl;
