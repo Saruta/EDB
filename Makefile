@@ -1,25 +1,26 @@
+include var.mk
+
 CC=clang++
-CFLAGS=
-LDFLAGS=
 EXEC=edb
-SRC= $(wildcard *.cc)
+SRC= $(wildcard *.cc) $(TARGET_REPO)/commands.cc
 OBJ= $(SRC:.cc=.o)
 
-all: $(EXEC)
+all: $(EXEC) clean
 
 $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-main.o: edb.hh 
+main.o: edb.hh config.hh 
 
 %.o: %.cc
 	$(CC) -o $@ $(CFLAGS) -c $<
 
 .PHONY: clean mrpoper
-
 clean:
 	rm -rf *.o
+	rm -rf $(TARGET_REPO)/*.o
 
 mrproper: clean
 	rm -rf $(EXEC)
+	rm -rf tests/test
 

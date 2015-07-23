@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cstdio>
 #include "edb.hh"
+#include "config.hh"
 
 using namespace std;
 int status = 0;
@@ -16,28 +17,21 @@ void do_child (int argc_, char* argv_[]) {
 }
 
 void do_trace (pid_t pid_) {
-//  while (true) {
     Edb edb(pid_);
     pid_t w = wait(&status);
-  /*  if (WIFEXITED(status))
-      cout << "exited" << endl;
-    if (WIFSIGNALED(status))
-      cout << "sig" << endl;
-    if (WIFSTOPPED(status))
-      cout << "stopped" << endl;
-    if (WIFCONTINUED(status))
-      cout << "continued" << endl; */
- //     break;
     if (w == -1)
       cout << "error" << endl;
-      while (true) {
-        cout << " (edb) " ;
-        std:: string input;
-        getline (cin, input);
-        if(edb.Parse (input)) 
-          edb.Execute ();
-      } 
-//  }
+    bool ret_ = true;
+    while (true) {
+      usleep (1000);
+      std:: string input;
+      cout << "(edb) ";
+      getline (cin, input);
+      if(edb.Parse (input)) 
+        ret_ = edb.Execute ();
+      if(!ret_)
+        edb.error_arg ();
+    } 
 }
 
 void usage (char* argv[]) {

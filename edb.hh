@@ -11,15 +11,18 @@
 #include <sys/user.h>
 #include <signal.h>
 #include <unistd.h>
+#include "config.hh"
+#include COMMANDS
 
 class Edb {
   public:
     Edb (pid_t pid_);
     bool Parse (const std::string& cmd);
     bool Execute ();
+    void error_arg ();
     
   private:
-    void _error_arg ();
+    void _show_arg (const user_regs_struct& regs_);
     pid_t pid;
     std::vector<std::string> tokens;
     std::list<std::string> cmd;
