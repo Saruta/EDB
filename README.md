@@ -19,10 +19,16 @@ make
 
 ### Features ###
 
-* continue # at breakpoint run the program
-* kill # kill the process
-* quit # exit debugger
-* registers # show registers
+```
+#!shell
+continue # at breakpoint run the program
+kill # kill the process
+quit # exit debugger
+registers # show registers
+
+```
+
+
 to add a breakpoint, put an int3 
 
 
