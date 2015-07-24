@@ -21,10 +21,10 @@ make
 
 ```
 #!shell
-continue # at breakpoint run the program
-kill # kill the process
-quit # exit debugger
-registers # show registers
+(edb) continue # at breakpoint run the program
+(edb) kill # kill the process
+(edb) quit # exit debugger
+(edb) registers # show registers
 
 ```
 
