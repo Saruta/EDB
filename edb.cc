@@ -8,6 +8,9 @@ Edb::Edb (pid_t pid_) {
   cmd.push_back ("kill");
   cmd.push_back ("continue");
   cmd.push_back ("registers");
+  cmd.push_back ("u");
+  cmd.push_back ("x");
+  cmd.push_back ("d");
 }
 
 bool Edb::Parse (const string& cmd) {
@@ -64,6 +67,11 @@ bool Edb::Execute () {
     Commands::show_arg (regs);
   } else if (tokens[0] == "kill")
     ptrace (PTRACE_KILL, pid, NULL, NULL); 
+  else if (tokens[0] == "u" || tokens[0] == "x" ||
+      tokens[0] == "d") {
+    unsigned int count = stoi (tokens[1], nullptr, 10);
+    Commands::show_mem (tokens[0][0],count,tokens[2],pid);
+  }
 
   tokens.clear();
   return true;

@@ -25,3 +25,14 @@ void Commands::show_arg (const user_regs_struct& regs_) {
   cout << "gs: " << regs_.xgs << endl;
   cout << "orig_eax: " << regs_.orig_eax << endl;
 }
+
+void Commands::show_mem (char type_, unsigned int count_,
+    std::string address_, pid_t pid_) {
+  unsigned int* p = (unsigned int*)stoi (address_,nullptr,0);
+  unsigned int val = 0;
+  for (int i =0; i < count_; i++) {
+    val = ptrace (PTRACE_PEEKTEXT, pid_, p, NULL);
+    cout << val << endl;
+    p += 1;
+  }
+}

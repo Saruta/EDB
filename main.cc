@@ -23,7 +23,7 @@ void do_trace (pid_t pid_) {
       cout << "error" << endl;
     bool ret_ = true;
     while (true) {
-      usleep (1000);
+      usleep (1000); /* avoid some ugly print */
       std:: string input;
       cout << "(edb) ";
       getline (cin, input);
