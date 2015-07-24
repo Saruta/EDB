@@ -6,11 +6,16 @@ gdb-like tool for easy debug.
 
 ### How do I get set up? ###
 
+
+```
+#!shell
 ./configure arch=i386  # x86_64 no implemented yet
-
 make 
-
 ./edb [prog] # no arguments implemented yet
+
+```
+
+
 
 ### Features ###
 
