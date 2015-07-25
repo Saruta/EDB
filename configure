@@ -69,8 +69,8 @@ if [ $TARGET_ARCH == "i386" ]; then
   echo CFLAGS=-m32 >> var.mk 
   echo LDFLAGS=-m32 >> var.mk 
 elif [ $TARGET_ARCH == "x86_64" ]; then
-  echo CFLAGS=-m32 >> var.mk 
-  echo LDFLAGS=-m32 >> var.mk 
+  echo CFLAGS= >> var.mk 
+  echo LDFLAGS= >> var.mk 
 fi
 
 cat <<EOF > ./config.hh
