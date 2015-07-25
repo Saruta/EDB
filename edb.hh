@@ -12,7 +12,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include "config.hh"
-#include COMMANDS
+#include "commands.hh"
 
 class Edb {
   public:
