@@ -8,6 +8,7 @@ Edb::Edb (pid_t pid_) {
   cmd.push_back ("kill");
   cmd.push_back ("continue");
   cmd.push_back ("registers");
+  cmd.push_back ("next");
   cmd.push_back ("u");
   cmd.push_back ("x");
   cmd.push_back ("d");
@@ -71,7 +72,8 @@ bool Edb::Execute () {
       tokens[0] == "d") {
     unsigned int count = stoi (tokens[1], nullptr, 10);
     Commands::show_mem (tokens[0][0],count,tokens[2],pid);
-  }
+  } else if (tokens[0] == "next")
+    ptrace (PTRACE_SINGLESTEP, pid, NULL, NULL);
 
   tokens.clear();
   return true;
