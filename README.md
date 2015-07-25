@@ -22,7 +22,7 @@ make
 ```
 #!shell
 (edb) continue # at breakpoint run the program
-(edb) next # single step
+(edb) next [count] # single step * count, if no count, count = 1
 (edb) kill # kill the process
 (edb) quit # exit debugger
 (edb) registers # show registers
