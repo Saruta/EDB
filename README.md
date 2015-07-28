@@ -35,7 +35,7 @@ make
 ```
 
 
-to add a breakpoint, put an int3 
+another way to add a breakpoint, put an int3 
 
 
 ```
