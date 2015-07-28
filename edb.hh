@@ -13,6 +13,8 @@
 #include <unistd.h>
 #include "config.hh"
 #include "commands.hh"
+#include "breakpoint.hh"
+
 
 class Edb {
   public:
@@ -20,10 +22,13 @@ class Edb {
     bool Parse (const std::string& cmd);
     bool Execute ();
     void error_arg ();
+    ~Edb();
     
   private:
     void _show_arg (const user_regs_struct& regs_);
+    
     pid_t pid;
+    Breakpoint *bp;
     std::vector<std::string> tokens;
     std::list<std::string> cmd;
 };

@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-m32 
-LDFLAGS= -m32
+CFLAGS=-m32
+LDFLAGS=-m32
 EXEC=test
 SRC= $(wildcard *.c)
 OBJ= $(SRC:.c=.o)

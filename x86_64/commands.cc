@@ -30,9 +30,24 @@ void Commands::show_mem (char type_, unsigned int count_,
     std::string address_, pid_t pid_) {
   unsigned int* p = (unsigned int*)stoi (address_,nullptr,0);
   unsigned int val = 0;
+  switch (type_) {
+    case 'u':
+      cout << dec;
+      break;
+    case 'x':
+      cout << hex;
+      break;
+    case 'd':
+      cout << dec;
+    default:
+      cout << hex;
+  }
   for (int i =0; i < count_; i++) {
     val = ptrace (PTRACE_PEEKTEXT, pid_, p, NULL);
-    cout << val << endl;
+    if (type_ == 'd')
+      cout << p << ": " << (int)val << endl;
+    else
+      cout << p << ": " << val << endl;
     p += 1;
   }
 }
