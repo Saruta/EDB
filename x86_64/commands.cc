@@ -28,7 +28,7 @@ void Commands::show_arg (const user_regs_struct& regs_) {
 
 void Commands::show_mem (char type_, unsigned int count_,
     std::string address_, pid_t pid_) {
-  unsigned int* p = (unsigned int*)stoi (address_,nullptr,0);
+  unsigned int p = (unsigned int)stoi (address_,nullptr,0);
   unsigned int val = 0;
   switch (type_) {
     case 'u':
@@ -51,3 +51,13 @@ void Commands::show_mem (char type_, unsigned int count_,
     p += 1;
   }
 }
+
+long Commands::get_ip (pid_t pid_) {
+  long val = ptrace (PTRACE_PEEKUSER,pid_, 8*RIP, NULL);
+  return val;
+}
+
+void Commands::set_ip (pid_t pid_, long value_) {
+  ptrace (PTRACE_POKEUSER, pid_, 8*RIP, value_);
+}
+

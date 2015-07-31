@@ -52,3 +52,12 @@ void Commands::show_mem (char type_, unsigned int count_,
     p += 1;
   }
 }
+
+long Commands::get_ip (pid_t pid_) {
+  return ptrace (PTRACE_PEEKUSER, pid_, 4*EIP, NULL);
+}
+
+void Commands::set_ip (pid_t pid_, long value_) {
+  ptrace (PTRACE_POKEUSER, pid_, 4*EIP, value_);
+}
+
