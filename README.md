@@ -9,7 +9,7 @@ gdb-like tool for easy debug.
 
 ```
 #!shell
-./configure arch=i386  # x86_64 no implemented yet
+./configure arch=i386  # x86_64 also available but has some bugs
 make 
 ./edb [prog] # no arguments implemented yet
 
