@@ -8,7 +8,7 @@
 
 # define TARGET_ARCH i386
 # define TARGET_REPO i386
-# define COMMANDS "i386/commands.hh"
+# define i386
 
 #endif /* _CONFIG_H_ */
 

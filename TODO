@@ -1,5 +1,9 @@
-memdump
-break
-blist
-bdel
-btrace
+memdump:
+  - symbols
+break:
+  - symbols
+  - bug: x86_64 override 64 bits when bp. For the moment,
+  when a 0xcc is executed, the debugger removes it. (in i386,
+      everything is ok)
+btrace:
+  - TODO
