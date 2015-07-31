@@ -23,6 +23,11 @@ make
 #!shell
 (edb) continue # at breakpoint run the program
 (edb) next [count] # single step * count, if no count, count = 1
+(edb) break 0xCAFE # breakpoint at 0xCAFE
+(edb) blist # list breakpoint
+(edb) bdel [index] # delete a breakpoint (index is display with blist)
+(edb) [x/u/d] [count] 0xCAFE # memory dump at 0xCAFE (size = count*4 bytes)
+# x -> hexa, u -> unsigned, d -> signed int
 (edb) kill # kill the process
 (edb) quit # exit debugger
 (edb) registers # show registers
@@ -30,7 +35,7 @@ make
 ```
 
 
-to add a breakpoint, put an int3 
+another way to add a breakpoint, is to put an int3 
 
 
 ```
