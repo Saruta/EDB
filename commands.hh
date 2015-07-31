@@ -17,6 +17,9 @@ class Commands {
     static void show_arg (const user_regs_struct& regs_);
     static void show_mem (char type_, unsigned int count_,
         std::string address_, pid_t pid_);
+    static long get_ip (pid_t);
+    static void set_ip (pid_t, long);
+    static void decrement_ip (pid_t);
 };
 
 #endif /* _COMMANDS_H */
