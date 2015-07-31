@@ -6,16 +6,17 @@ Breakpoint::Breakpoint (pid_t pid_) {
   pid = pid_;
 }
 
-unsigned int Breakpoint::_get_ip () {
-  return ptrace (PTRACE_PEEKUSER, pid, 4*EIP, NULL);
-} 
-
 bool Breakpoint::is_breakpoint () {
-  unsigned int ip = _get_ip ();
+  long ip = Commands::get_ip (pid);
   std::list<struct breakpoint_t>::iterator it;
   for (it = bp_tabl.begin(); it != bp_tabl.end(); it++)
-    if (((unsigned int)it->addr+1) == ip) {return true;}
+    if (((long)it->addr+1) == ip) {return true;}
   return false;
+}
+
+void Breakpoint::_decrement_ip () {
+  long val = Commands::get_ip (pid);
+  Commands::set_ip (pid, val-1);
 }
 
 bool Breakpoint::add (unsigned int addr_) {
@@ -27,7 +28,7 @@ bool Breakpoint::add (unsigned int addr_) {
   bp_tabl.push_back (bp);
 
   ptrace (PTRACE_POKETEXT, pid, (unsigned int*)addr_, 
-      (unsigned int*) BREAK_OPCODE);
+      (char) BREAK_OPCODE);
   return true;
 }
 
@@ -41,25 +42,27 @@ bool Breakpoint::remove (int index_) {
 }
 
 bool Breakpoint::pass_over () {
-  unsigned int ip = _get_ip ();
+  unsigned int ip = Commands::get_ip (pid);
   std::list<struct breakpoint_t>::iterator it;
   for (it = bp_tabl.begin(); ((unsigned int)it-> addr+1) == ip
       ; it++)
     ;
-  ip--;
   it--;
   /* decrement ip */
-  ptrace (PTRACE_POKEUSER, pid, 4*EIP, (void*)(ip));
+  _decrement_ip ();
   /* recover opcode at breakpoint */
 
   ptrace (PTRACE_POKETEXT, pid, it->addr, it->opcode);
   /* single step */
-//  for (int i = 0; i< 4; i++)
   ptrace (PTRACE_SINGLESTEP, pid, NULL, NULL);
-  usleep (100);
+
+  usleep (400);
   /* recover breakpoint */
-  ptrace (PTRACE_POKETEXT, pid, it->addr, 
-      (unsigned int*)BREAK_OPCODE);
+#ifndef x86_64 // FIXME 
+  ptrace (PTRACE_POKETEXT, pid, (unsigned int *)it->addr, 
+      (char)BREAK_OPCODE);
+#endif
+  usleep (400);
   return true;
 }
 

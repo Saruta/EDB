@@ -8,11 +8,13 @@
 #include <sys/reg.h>
 #include <sys/user.h>
 #include <unistd.h>
+#include "commands.hh"
+#include "config.hh"
 
 #define BREAK_OPCODE 0xcc
 
 struct breakpoint_t {
-  unsigned int addr;
+  unsigned long addr;
   char* addr_sym;
   unsigned long opcode;
 };
@@ -26,7 +28,7 @@ class Breakpoint {
     void list ();
     bool is_breakpoint ();
   private:
-    unsigned int _get_ip ();
+    void _decrement_ip ();
     pid_t pid;
     std::list<struct breakpoint_t> bp_tabl;
 };
