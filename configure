@@ -84,7 +84,7 @@ cat <<EOF > ./config.hh
 
 # define TARGET_ARCH $TARGET_ARCH
 # define TARGET_REPO $TARGET_ARCH
-# define COMMANDS "$TARGET_ARCH/commands.hh"
+# define $TARGET_ARCH
 
 #endif /* _CONFIG_H_ */
 
