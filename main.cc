@@ -7,6 +7,7 @@
 #include <cstdio>
 #include "edb.hh"
 #include "config.hh"
+#include "elf.hh"
 
 using namespace std;
 int status = 0;
@@ -42,7 +43,8 @@ void usage (char* argv[]) {
 int main (int argc, char* argv[]) {
   if (argc < 2)
     usage (argv); 
-
+  
+  ElfReader elfReader (argv[1]); 
 
   pid_t pid = fork ();
 

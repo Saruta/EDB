@@ -2,8 +2,8 @@ include var.mk
 
 CC=clang++
 EXEC=edb
-CFLAGS+=-std=c++0x -v
-LDFLAGS+=-std=c++0x -v
+CFLAGS+=-std=c++0x 
+LDFLAGS+=-std=c++0x 
 SRC= $(wildcard *.cc) $(TARGET_REPO)/commands.cc
 OBJ= $(SRC:.cc=.o)
 
