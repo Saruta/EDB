@@ -1,7 +1,7 @@
 ### EDB ###
 /!\ always in development
 
-Easy DebuGer is a micro version of 
+Easy DeBugger is a micro version of 
 gdb-like tool for easy debug.
 
 ### How do I get set up? ###
