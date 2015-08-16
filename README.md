@@ -20,7 +20,7 @@ make
 ### Features ###
 
 ```
-#!gdb
+#!shell
 (edb) continue # at breakpoint run the program
 (edb) next [count] # single step * count, if no count, count = 1
 (edb) break 0xCAFE # breakpoint at 0xCAFE
