@@ -1,14 +1,16 @@
 #include <stdio.h>
 
+int little_elf = 0;
+
 void func1 ();
 
 int main() {
   puts (" before breakpoint");
-  asm volatile ("int3\n");
   puts (" after breakpoint");
   puts (" Hello ");
+  func1 ();
   puts (" World! ");
-  asm volatile ("int3\n");
+  asm ("int3");
   return 0;
 }
 
