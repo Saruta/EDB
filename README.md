@@ -8,7 +8,6 @@ gdb-like tool for easy debug.
 
 
 ```
-#!shell
 ./configure arch=i386  # x86_64 also available but has some bugs
 make 
 ./edb [prog] # no arguments implemented yet
@@ -20,7 +19,6 @@ make
 ### Features ###
 
 ```
-#!shell
 (edb) continue # at breakpoint run the program
 (edb) next [count] # single step * count, if no count, count = 1
 (edb) break 0xCAFE # breakpoint at 0xCAFE
@@ -31,6 +29,7 @@ make
 (edb) kill # kill the process
 (edb) quit # exit debugger
 (edb) registers # show registers
+(edb) backtrace # only i386
 
 ```
 
