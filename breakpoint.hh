@@ -12,6 +12,7 @@
 #include "config.hh"
 
 #define BREAK_OPCODE 0xcc
+#define BP_OPCODE(opc) ((opc & 0xffffff00) | BREAK_OPCODE)
 
 struct breakpoint_t {
   unsigned long addr;

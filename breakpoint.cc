@@ -28,7 +28,7 @@ bool Breakpoint::add (unsigned int addr_) {
   bp_tabl.push_back (bp);
 
   ptrace (PTRACE_POKETEXT, pid, (unsigned int*)addr_, 
-      (char) BREAK_OPCODE);
+      BP_OPCODE(content));
   return true;
 }
 
@@ -60,7 +60,7 @@ bool Breakpoint::pass_over () {
   /* recover breakpoint */
 #ifndef x86_64 // FIXME 
   ptrace (PTRACE_POKETEXT, pid, (unsigned int *)it->addr, 
-      (char)BREAK_OPCODE);
+      BP_OPCODE(it->opcode));
 #endif
   usleep (400);
   return true;
