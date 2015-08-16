@@ -14,6 +14,7 @@
 #include "config.hh"
 #include "commands.hh"
 #include "breakpoint.hh"
+#include "backtrace.hh"
 
 
 class Edb {
