@@ -1,2 +1,2 @@
-language: c++ 
-build: make
+language: c++
+script: make
