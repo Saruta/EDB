@@ -1,3 +1,5 @@
+https://travis-ci.org/Saruta/EDB.svg?branch=master
+
 ### EDB ###
 /!\ always in development
 
