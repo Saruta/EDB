@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int ElfReader::extract_section (string str, Shdr* shdr) {
+int ElfReader::extract_section (string str, Shdr* shdr, ifstream& elf) {
   int i ;
   for (i = 0; i< section_names.size(); i++)
     if (str == section_names[i])
@@ -12,7 +12,7 @@ int ElfReader::extract_section (string str, Shdr* shdr) {
   
   int index = i;
   for (int i = 0; i < elf_header.e_shnum ; i++) {
-    extract_section (i, shdr);
+    extract_section (i, shdr, elf);
     if (shdr->sh_name == index)
       break;
   }
@@ -20,15 +20,15 @@ int ElfReader::extract_section (string str, Shdr* shdr) {
 }
 
 void ElfReader::extract_section (unsigned int index_, 
-    Shdr* section_) {
+				 Shdr* section_, ifstream& elf) {
   elf.seekg (elf_header.e_shoff + index_*sizeof(Shdr));
   elf.read ((char*)section_,sizeof(Shdr));
 }
 
 
-void ElfReader::dump_symTable () {
-  extract_section (".symtab", &sym_header);
-  extract_section (".strtab", &str_header);
+void ElfReader::dump_symTable (ifstream& elf) {
+  extract_section (".symtab", &sym_header, elf);
+  extract_section (".strtab", &str_header, elf);
   uint32_t symtab_entries = sym_header.sh_size/sym_header.sh_entsize;
 
   int i;
@@ -63,8 +63,8 @@ void ElfReader::dump_symTable () {
 
 }
 
-void ElfReader::dump_shstrTable () {
-  extract_section (elf_header.e_shstrndx, &shstr_header);
+void ElfReader::dump_shstrTable (ifstream& elf) {
+  extract_section (elf_header.e_shstrndx, &shstr_header, elf);
     char* str = new char[40];
     for (int i = 0; i < shstr_header.sh_size; i++) {
       elf.seekg (shstr_header.sh_offset + i);
@@ -76,7 +76,7 @@ void ElfReader::dump_shstrTable () {
 
 
 ElfReader::ElfReader (std::string path_) {
-  elf = ifstream (path_, 
+  ifstream elf (path_, 
       ifstream::in | ifstream::binary | ifstream::ate);
   if (!elf.is_open()){
     cerr << "Error: unable to open elf" << endl;
@@ -94,9 +94,9 @@ ElfReader::ElfReader (std::string path_) {
 # endif
 
 
-  dump_shstrTable ();
-  extract_section (".symtab",&test_header);
-  dump_symTable ();
+  dump_shstrTable (elf);
+  extract_section (".symtab",&test_header, elf);
+  dump_symTable (elf);
   elf.close ();
 }
 

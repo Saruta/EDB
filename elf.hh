@@ -26,16 +26,17 @@ class ElfReader {
   /* this is VERY ugly ^^ */
     std::map<std::string,unsigned int> sym_map;
     std::vector<std::string> section_names;
-    std::ifstream elf;
+  //    std::ifstream elf;
     Ehdr elf_header;
     Shdr shstr_header;
     Shdr sym_header;
     Shdr str_header;
     Shdr test_header;
-    void dump_symTable (); 
-    void dump_shstrTable (); 
-    int extract_section (std::string str, Shdr* shdr);
-    void extract_section (unsigned int index_, Shdr* section_);
+    void dump_symTable (std::ifstream& elf); 
+    void dump_shstrTable (std::ifstream& elf); 
+    int extract_section (std::string str, Shdr* shdr, std::ifstream& elf);
+    void extract_section (unsigned int index_, Shdr* section_,
+			  std::ifstream& elf);
   public:
     ElfReader (std::string path_);
     unsigned int get_symbol(std::string symb_);
