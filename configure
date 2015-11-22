@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ARCH_LIST="i386 x86_64"
 TARGET_ARCH=i386
@@ -54,9 +54,9 @@ do
 esac
 done
 
-if [ $TARGET_ARCH == "i386" ]; then
+if [ $TARGET_ARCH = "i386" ]; then
   check_i386_tools 
-elif [ $TARGET_ARCH == "x86_64" ]; then
+elif [ $TARGET_ARCH = "x86_64" ]; then
   check_x86_64_tools
 fi
 
@@ -65,10 +65,10 @@ TARGET_ARCH=$TARGET_ARCH
 TARGET_REPO=$TARGET_ARCH
 EOF
 
-if [ $TARGET_ARCH == "i386" ]; then
+if [ $TARGET_ARCH = "i386" ]; then
   echo CFLAGS=-m32 >> var.mk 
   echo LDFLAGS=-m32 >> var.mk 
-elif [ $TARGET_ARCH == "x86_64" ]; then
+elif [ $TARGET_ARCH = "x86_64" ]; then
   echo CFLAGS= >> var.mk 
   echo LDFLAGS= >> var.mk 
 fi
