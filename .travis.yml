@@ -1,4 +1,4 @@
-language: cpp
+language: clang++
 compiler: gcc
 sudo: false
 script: make
