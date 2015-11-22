@@ -1,4 +1,11 @@
-language: clang++
-compiler: gcc
+language: cpp
+compiler: clang++
 sudo: false
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+    - clang-3.7.0
+    - clang++-3.7.0
 script: make
